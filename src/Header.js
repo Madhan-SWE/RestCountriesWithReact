@@ -1,7 +1,5 @@
-function Header (props) {
-    return <h1>Hello {
-        props.name
-    } </h1>
+function Header(props) {
+    return <h1 className="text-white text-center p-4">REST COUNTRIES</h1>;
 }
 
 export default Header;

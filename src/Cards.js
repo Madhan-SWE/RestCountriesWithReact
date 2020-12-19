@@ -23,13 +23,21 @@ function Card({ props }) {
 
 function Cards(props) {
     let countries = props.countries;
-    console.log(countries);
+    let itemsPerPage = props.itemsPerPage;
+    let currentPage = props.currentPage;
+
+    let end = currentPage * itemsPerPage;
+
+    end = end > countries.length ? countries.length : end;
+    let start = (currentPage - 1) * itemsPerPage;
+    let countriesObj = countries.slice(start, end);
+
     if (countries.length === 0) {
         return (
             <div className="row">
                 <div className="col-12">
                     <div
-                        class="alert alert-danger text-center text-bold "
+                        className="alert alert-danger text-center text-bold "
                         role="alert"
                     >
                         <h5>No results found !</h5>
@@ -43,13 +51,13 @@ function Cards(props) {
         <div className="row bg-dark p-2">
             <div className="col-12">
                 <div
-                    class="alert alert-success text-center text-bold "
+                    className="alert alert-success text-center text-bold "
                     role="alert"
                 >
                     <h5>{countries.length} results found</h5>
                 </div>
             </div>
-            {countries.map((country) => {
+            {countriesObj.map((country) => {
                 return <Card props={country} key={country.name} />;
             })}
         </div>
